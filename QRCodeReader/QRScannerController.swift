@@ -13,9 +13,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
 
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
-    
     var captureSession: AVCaptureSession!
-    var previewLayer: AVCaptureVideoPreviewLayer!
     
     @IBOutlet var messageLabel:UILabel!
     @IBOutlet var topbar: UIView!
@@ -28,7 +26,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     func prepareCamera()
     {
-        view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
         
         // Get the back-facing camera for capturing videos
@@ -49,7 +46,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
                 return
             }
             
-    
+            // Set the input device on the capture session.
             if (captureSession.canAddInput(videoInput)) {
                 captureSession.addInput(videoInput)
             } else {
@@ -57,11 +54,13 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
                 return
             }
             
+            // Initialize a AVCaptureMetadataOutput object and set it as the output device to the capture session.
             let metadataOutput = AVCaptureMetadataOutput()
             
             if (captureSession.canAddOutput(metadataOutput)) {
                 captureSession.addOutput(metadataOutput)
                 
+                // Set delegate and use the default dispatch queue to execute the call back
                 metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
                 metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417, .qr]
             } else {
@@ -69,11 +68,13 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
                 return
             }
             
+            // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
             videoPreviewLayer?.frame = view.layer.bounds
             view.layer.addSublayer(videoPreviewLayer!)
             
+            // Start video capture.
             captureSession.startRunning()
             
         } catch {
@@ -85,8 +86,41 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         // Move the message label and top bar to the front
         view.bringSubview(toFront: messageLabel)
         view.bringSubview(toFront: topbar)
-
+        
+        // Initialize QR Code Frame to highlight the QR code
+        qrCodeFrameView = UIView()
+        
+        if let qrCodeFrameView = qrCodeFrameView {
+            qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
+            qrCodeFrameView.layer.borderWidth = 2
+            view.addSubview(qrCodeFrameView)
+            view.bringSubview(toFront: qrCodeFrameView)
+        }
     }
+    
+     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        
+        // Check if the metadataObjects array is not nil and it contains at least one object.
+        if metadataObjects.count == 0 {
+            qrCodeFrameView?.frame = CGRect.zero
+            messageLabel.text = "No QR code is detected"
+            return
+        }
+        
+        // Get the metadata object.
+        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        
+        if metadataObj.type == AVMetadataObject.ObjectType.qr {
+            // If the found metadata is equal to the QR code metadata then update the status label's text and set the bounds
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
+            qrCodeFrameView?.frame = barCodeObject!.bounds
+            
+            if metadataObj.stringValue != nil {
+                messageLabel.text = metadataObj.stringValue
+            }
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
