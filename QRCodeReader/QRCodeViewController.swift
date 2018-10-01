@@ -2,7 +2,7 @@
 //  QRCodeViewController.swift
 //  QRCodeReader
 //
-//  Created by Luis on 10/01/2018
+//  Created by Luis M. on 10/01/2018
 //  Copyright © 2018 All rights reserved.
 //
 
