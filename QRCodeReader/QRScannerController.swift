@@ -28,36 +28,52 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     func prepareCamera()
     {
-        // Get the back-facing camera for capturing videos
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera], mediaType: AVMediaType.video, position: .back)
+        view.backgroundColor = UIColor.black
+        captureSession = AVCaptureSession()
         
-        guard let captureDevice = deviceDiscoverySession.devices.first else {
-            print("Failed to get the camera device")
-            return
+        // Get the back-facing camera for capturing videos
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video)
+            else {
+                print("Failed to get the camera device")
+                return
         }
         
         do {
             // Get an instance of the AVCaptureDeviceInput class using the previous device object.
-            let input = try AVCaptureDeviceInput(device: captureDevice)
+            let videoInput: AVCaptureDeviceInput
             
-            // Set the input device on the capture session.
-            captureSession.addInput(input)
+            do {
+                videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+            } catch {
+                print("Failed to get videoInput")
+                return
+            }
             
-            // Initialize a AVCaptureMetadataOutput object and set it as the output device to the capture session.
-            let captureMetadataOutput = AVCaptureMetadataOutput()
-            captureSession.addOutput(captureMetadataOutput)
+    
+            if (captureSession.canAddInput(videoInput)) {
+                captureSession.addInput(videoInput)
+            } else {
+                //failed()
+                return
+            }
             
-            // Set delegate and use the default dispatch queue to execute the call back
-            captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+            let metadataOutput = AVCaptureMetadataOutput()
             
-            // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
+            if (captureSession.canAddOutput(metadataOutput)) {
+                captureSession.addOutput(metadataOutput)
+                
+                metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+                metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417, .qr]
+            } else {
+                //failed()
+                return
+            }
+            
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
             videoPreviewLayer?.frame = view.layer.bounds
             view.layer.addSublayer(videoPreviewLayer!)
             
-            // Start video capture.
             captureSession.startRunning()
             
         } catch {
@@ -65,6 +81,10 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             print(error)
             return
         }
+        
+        // Move the message label and top bar to the front
+        view.bringSubview(toFront: messageLabel)
+        view.bringSubview(toFront: topbar)
 
     }
 
