@@ -62,7 +62,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
                 
                 // Set delegate and use the default dispatch queue to execute the call back
                 metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-                metadataOutput.metadataObjectTypes = [.qr, .code128]
+                metadataOutput.metadataObjectTypes = [.qr, .code128, .upce, .code39]
             } else {
                 //failed()
                 return
@@ -110,7 +110,11 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         // Get the metadata object.
         let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
         
-        if metadataObj.type == .qr || metadataObj.type  == .code128 {
+        if metadataObj.type == .qr ||
+            metadataObj.type  == .code128 ||
+            metadataObj.type  == .upce ||
+            metadataObj.type == .code39
+        {
             // If the found metadata is equal to the QR code metadata then update the status label's text and set the bounds
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
             qrCodeFrameView?.frame = barCodeObject!.bounds
