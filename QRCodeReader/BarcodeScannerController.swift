@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class BarcodeScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
