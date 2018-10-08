@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F4F09DB31DAF669400026BB2 /* QRCodeReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCodeReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4F09DB31DAF669400026BB2 /* BarcodeLibre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarcodeLibre.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F09DB61DAF669400026BB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4F09DBB1DAF669400026BB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4F09DBD1DAF669400026BB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,7 +40,7 @@
 		F4F09DAA1DAF669400026BB2 = {
 			isa = PBXGroup;
 			children = (
-				F4F09DB51DAF669400026BB2 /* QRCodeReader */,
+				F4F09DB51DAF669400026BB2 /* BarcodeLibre */,
 				F4F09DB41DAF669400026BB2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,12 +48,12 @@
 		F4F09DB41DAF669400026BB2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4F09DB31DAF669400026BB2 /* QRCodeReader.app */,
+				F4F09DB31DAF669400026BB2 /* BarcodeLibre.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F4F09DB51DAF669400026BB2 /* QRCodeReader */ = {
+		F4F09DB51DAF669400026BB2 /* BarcodeLibre */ = {
 			isa = PBXGroup;
 			children = (
 				F4F09DB61DAF669400026BB2 /* AppDelegate.swift */,
@@ -64,15 +64,15 @@
 				F4F09DC81DAF6A3800026BB2 /* BarCodeViewController.swift */,
 				F4F09DCA1DAF6A4F00026BB2 /* BarcodeScannerController.swift */,
 			);
-			path = QRCodeReader;
+			path = BarcodeLibre;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F4F09DB21DAF669400026BB2 /* QRCodeReader */ = {
+		F4F09DB21DAF669400026BB2 /* BarcodeLibre */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4F09DC51DAF669400026BB2 /* Build configuration list for PBXNativeTarget "QRCodeReader" */;
+			buildConfigurationList = F4F09DC51DAF669400026BB2 /* Build configuration list for PBXNativeTarget "BarcodeLibre" */;
 			buildPhases = (
 				F4F09DAF1DAF669400026BB2 /* Sources */,
 				F4F09DB01DAF669400026BB2 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = QRCodeReader;
+			name = BarcodeLibre;
 			productName = QRCodeReader;
-			productReference = F4F09DB31DAF669400026BB2 /* QRCodeReader.app */;
+			productReference = F4F09DB31DAF669400026BB2 /* BarcodeLibre.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -105,7 +105,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F4F09DAE1DAF669400026BB2 /* Build configuration list for PBXProject "QRCodeReader" */;
+			buildConfigurationList = F4F09DAE1DAF669400026BB2 /* Build configuration list for PBXProject "BarcodeLibre" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -118,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4F09DB21DAF669400026BB2 /* QRCodeReader */,
+				F4F09DB21DAF669400026BB2 /* BarcodeLibre */,
 			);
 		};
 /* End PBXProject section */
@@ -281,7 +281,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DK4XAPN6B6;
-				INFOPLIST_FILE = QRCodeReader/Info.plist;
+				INFOPLIST_FILE = BarcodeLibre/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bushki.BarcodeLibre;
@@ -297,7 +297,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DK4XAPN6B6;
-				INFOPLIST_FILE = QRCodeReader/Info.plist;
+				INFOPLIST_FILE = BarcodeLibre/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
@@ -312,7 +312,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F4F09DAE1DAF669400026BB2 /* Build configuration list for PBXProject "QRCodeReader" */ = {
+		F4F09DAE1DAF669400026BB2 /* Build configuration list for PBXProject "BarcodeLibre" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4F09DC31DAF669400026BB2 /* Debug */,
@@ -321,7 +321,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4F09DC51DAF669400026BB2 /* Build configuration list for PBXNativeTarget "QRCodeReader" */ = {
+		F4F09DC51DAF669400026BB2 /* Build configuration list for PBXNativeTarget "BarcodeLibre" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4F09DC61DAF669400026BB2 /* Debug */,
