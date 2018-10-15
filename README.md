@@ -5,4 +5,4 @@
 Free, no ads, no IAP, barcode scanner for ios 
 
 ## WIP
-Be aware, the the project is under heavy development.
+Be aware the the project is under development.
